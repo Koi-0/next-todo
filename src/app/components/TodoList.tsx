@@ -1,7 +1,7 @@
 import { TodoListProps } from "@/types/todo.type";
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ todos, onToggle, onDelete }: TodoListProps) => {
+const TodoList = ({ todos, onToggle, onDelete, onUpdate }: TodoListProps) => {
   if (todos.length === 0) {
     return (
       <div className="bg-sky-400 py-10 text-center text-gray-500">
@@ -18,6 +18,7 @@ const TodoList = ({ todos, onToggle, onDelete }: TodoListProps) => {
           todo={todo}
           onToggle={onToggle}
           onDelete={onDelete}
+          onUpdate={onUpdate}
         />
       ))}
     </ul>

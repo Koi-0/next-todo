@@ -31,6 +31,10 @@ const TodoContainer = () => {
     updateTodoMutation.mutate(updatedTodo);
   };
 
+  const handleUpdateTodo = (updatedTodo: Todo) => {
+    updateTodoMutation.mutate(updatedTodo);
+  };
+
   const handleDeleteTodo = (id: string) => {
     deleteTodoMutation.mutate(id);
   };
@@ -64,6 +68,7 @@ const TodoContainer = () => {
         todos={filteredTodos}
         onToggle={handleToggleComplete}
         onDelete={handleDeleteTodo}
+        onUpdate={handleUpdateTodo}
       />
     </section>
   );

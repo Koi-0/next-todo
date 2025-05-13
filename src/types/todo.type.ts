@@ -15,6 +15,7 @@ export interface TodoListProps {
   todos: Todo[];
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
+  onUpdate: (updatedTodo: Todo) => void;
 }
 
 /** 할 일 아이템에서 사용하는 props */
@@ -22,4 +23,5 @@ export interface TodoItemProps {
   todo: Todo;
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
+  onUpdate: (updatedTodo: Todo) => void;
 }
