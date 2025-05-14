@@ -1,5 +1,7 @@
 import { TodoFormProps } from "@/types/todo.type";
 import { useState } from "react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 const TodoForm = ({ onAdd }: TodoFormProps) => {
   const [inputText, setInputText] = useState("");
@@ -17,16 +19,13 @@ const TodoForm = ({ onAdd }: TodoFormProps) => {
       onSubmit={handleSubmit}
       className="flex items-center justify-center gap-2"
     >
-      <input
+      <Input
         type="text"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
         placeholder="새로운 할 일을 입력하세요"
-        className="flex-1 rounded bg-slate-400 px-2 py-2"
       />
-      <button type="submit" className="rounded bg-black px-3 py-2">
-        추가
-      </button>
+      <Button type="submit">추가</Button>
     </form>
   );
 };
