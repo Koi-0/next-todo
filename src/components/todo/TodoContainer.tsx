@@ -4,6 +4,16 @@ import { useTodoMutations } from "@/mutations/todo.mutations";
 import { useTodosQuery } from "@/queries/todo.queries";
 import { Todo } from "@/types/todo.type";
 import { useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
+import { Button } from "../ui/button";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
@@ -50,19 +60,37 @@ const TodoContainer = () => {
   if (isError) return <p>에러가 발생했습니다.</p>;
 
   return (
-    <section className="space-y-4 bg-blue-900">
+    <section className="space-y-4 p-4">
       <TodoForm onAdd={handleAddTodo} />
       <Tabs
         defaultValue="all"
-        className="bg-red-300"
         value={filterType}
         onValueChange={(value) => setFilterType(value as typeof filterType)}
       >
-        <TabsList>
-          <TabsTrigger value="all">all</TabsTrigger>
-          <TabsTrigger value="completed">completed</TabsTrigger>
-          <TabsTrigger value="pending">pending</TabsTrigger>
-        </TabsList>
+        <div className="flex items-center justify-between">
+          <AlertDialog></AlertDialog>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="outline">💡 Tip</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogDescription>
+                  할 일 내용이 길면 일부가 생략되어 ‘…’으로 표시될 수 있어요.
+                  최대 35자 이내로 입력하면 전체 내용을 볼 수 있습니다!
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogAction>Cancel</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+          <TabsList>
+            <TabsTrigger value="all">all</TabsTrigger>
+            <TabsTrigger value="completed">completed</TabsTrigger>
+            <TabsTrigger value="pending">pending</TabsTrigger>
+          </TabsList>
+        </div>
       </Tabs>
       <TodoList
         todos={filteredTodos}
