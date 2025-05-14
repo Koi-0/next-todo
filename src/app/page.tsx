@@ -16,8 +16,8 @@ const Home = async () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <main className="mx-auto max-w-md space-y-4 bg-red-500 p-4">
-        <h1 className="text-2xl font-bold">📝 Todo List</h1>
+      <main className="mx-auto max-w-xl min-w-80 py-4">
+        <h1 className="p-4 text-2xl font-bold">📝 Todo List</h1>
         <TodoContainer />
       </main>
     </HydrationBoundary>

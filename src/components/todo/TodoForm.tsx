@@ -17,7 +17,7 @@ const TodoForm = ({ onAdd }: TodoFormProps) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex items-center justify-center gap-2"
+      className="flex items-center justify-center gap-4"
     >
       <Input
         type="text"
