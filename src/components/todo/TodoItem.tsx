@@ -2,6 +2,7 @@
 
 import { TodoItemProps } from "@/types/todo.type";
 import { useState } from "react";
+import { Checkbox } from "../ui/checkbox";
 
 const TodoItem = ({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -31,13 +32,11 @@ const TodoItem = ({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) => {
 
   return (
     <li className="flex items-center justify-between gap-2 border-b bg-red-300 p-2">
-      <label className="flex items-center gap-2 bg-amber-400 p-2">
-        <input
-          type="checkbox"
-          checked={todo.completed}
-          onChange={() => onToggle(todo.id)}
-        />
-      </label>
+      <Checkbox
+        checked={todo.completed}
+        onCheckedChange={() => onToggle(todo.id)}
+      />
+
       {isEditing ? (
         <>
           <div className="flex flex-1 items-center gap-2">
