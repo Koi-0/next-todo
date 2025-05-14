@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { useTodosQuery } from "../queries/todo.queries";
+import { useTodoMutations } from "@/mutations/todo.mutations";
+import { useTodosQuery } from "@/queries/todo.queries";
 import { Todo } from "@/types/todo.type";
+import { useState } from "react";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
-import { useTodoMutations } from "../mutations/todo.mutations";
 
 const TodoContainer = () => {
   const [filterType, setFilterType] = useState<"all" | "completed" | "pending">(
