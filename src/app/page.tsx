@@ -1,10 +1,10 @@
+import TodoContainer from "@/components/todo/TodoContainer";
+import { getTodos } from "@/services/todo-services";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import TodoContainer from "./components/TodoContainer";
-import { getTodos } from "./api/todo-api";
 
 const Home = async () => {
   const queryClient = new QueryClient();
