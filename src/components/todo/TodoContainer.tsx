@@ -4,6 +4,7 @@ import { useTodoMutations } from "@/mutations/todo.mutations";
 import { useTodosQuery } from "@/queries/todo.queries";
 import { Todo } from "@/types/todo.type";
 import { useState } from "react";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 
@@ -51,19 +52,18 @@ const TodoContainer = () => {
   return (
     <section className="space-y-4 bg-blue-900">
       <TodoForm onAdd={handleAddTodo} />
-      <div className="space-x-4 bg-yellow-200">
-        {["all", "completed", "pending"].map((type) => (
-          <button
-            key={type}
-            className={`rounded px-2 py-2 text-black ${
-              filterType === type ? "bg-blue-500 text-white" : "bg-gray-200"
-            }`}
-            onClick={() => setFilterType(type as typeof filterType)}
-          >
-            {type === "all" ? "전체" : type === "completed" ? "완료" : "미완료"}
-          </button>
-        ))}
-      </div>
+      <Tabs
+        defaultValue="all"
+        className="bg-red-300"
+        value={filterType}
+        onValueChange={(value) => setFilterType(value as typeof filterType)}
+      >
+        <TabsList>
+          <TabsTrigger value="all">all</TabsTrigger>
+          <TabsTrigger value="completed">completed</TabsTrigger>
+          <TabsTrigger value="pending">pending</TabsTrigger>
+        </TabsList>
+      </Tabs>
       <TodoList
         todos={filteredTodos}
         onToggle={handleToggleComplete}
