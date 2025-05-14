@@ -1,7 +1,7 @@
 import { TodoFormProps } from "@/types/todo.type";
 import { useState } from "react";
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 const TodoForm = ({ onAdd }: TodoFormProps) => {
   const [inputText, setInputText] = useState("");
@@ -25,7 +25,9 @@ const TodoForm = ({ onAdd }: TodoFormProps) => {
         onChange={(e) => setInputText(e.target.value)}
         placeholder="새로운 할 일을 입력하세요"
       />
-      <Button type="submit">추가</Button>
+      <Button type="submit" className="bg-[#2a83a6] text-white">
+        추가
+      </Button>
     </form>
   );
 };

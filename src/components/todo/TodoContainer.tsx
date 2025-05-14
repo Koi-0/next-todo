@@ -11,6 +11,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
@@ -60,7 +61,7 @@ const TodoContainer = () => {
   if (isError) return <p>에러가 발생했습니다.</p>;
 
   return (
-    <section className="space-y-4 p-4">
+    <section className="space-y-8 p-4">
       <TodoForm onAdd={handleAddTodo} />
       <Tabs
         defaultValue="all"
@@ -68,13 +69,13 @@ const TodoContainer = () => {
         onValueChange={(value) => setFilterType(value as typeof filterType)}
       >
         <div className="flex items-center justify-between">
-          <AlertDialog></AlertDialog>
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="outline">💡 Tip</Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
+                <AlertDialogTitle>💡 Tip</AlertDialogTitle>
                 <AlertDialogDescription>
                   할 일 내용이 길면 일부가 생략되어 ‘…’으로 표시될 수 있어요.
                   최대 35자 이내로 입력하면 전체 내용을 볼 수 있습니다!

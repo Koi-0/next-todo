@@ -33,7 +33,7 @@ const TodoItem = ({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) => {
   };
 
   return (
-    <li className="justify-betwee flex items-center gap-2 rounded-md bg-amber-200 p-2 shadow-md">
+    <li className="justify-betwee flex items-center gap-2 rounded-md bg-[#F3E5AB] p-2 shadow-md">
       <Checkbox
         checked={todo.completed}
         onCheckedChange={() => onToggle(todo.id)}
@@ -47,6 +47,7 @@ const TodoItem = ({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) => {
               value={editedTitle}
               onChange={(e) => setEditedTitle(e.target.value)}
               onKeyDown={handleKeyDown}
+              className="bg-primary-foreground border-none"
             />
           </div>
           <div className="flex gap-2">
