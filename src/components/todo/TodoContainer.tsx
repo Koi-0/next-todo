@@ -10,10 +10,11 @@ import ErrorFallback from "../ui/error-fallback";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
+import { ALL, COMPLETED, MESSAGES, PENDING } from "@/constants/constants";
 
 const TodoContainer = () => {
   const [filterType, setFilterType] = useState<"all" | "completed" | "pending">(
-    "all",
+    ALL,
   );
 
   const { data: todos = [], isPending, isError } = useTodosQuery();
@@ -56,8 +57,8 @@ const TodoContainer = () => {
   );
 
   const filteredTodos = todos.filter((todo) => {
-    if (filterType === "completed") return todo.completed;
-    if (filterType === "pending") return !todo.completed;
+    if (filterType === COMPLETED) return todo.completed;
+    if (filterType === PENDING) return !todo.completed;
     return true;
   });
 
@@ -65,8 +66,8 @@ const TodoContainer = () => {
   if (isError)
     return (
       <ErrorFallback
-        errorTitle="ERROR"
-        errorMessage="데이터를 불러오는 중 문제가 발생했습니다."
+        errorTitle={MESSAGES.ERROR_TITLE}
+        errorMessage={MESSAGES.ERROR_MESSAGE}
       />
     );
 
@@ -89,9 +90,9 @@ const TodoContainer = () => {
             onConfirm={() => {}}
           />
           <TabsList>
-            <TabsTrigger value="all">all</TabsTrigger>
-            <TabsTrigger value="completed">completed</TabsTrigger>
-            <TabsTrigger value="pending">pending</TabsTrigger>
+            <TabsTrigger value={ALL}>all</TabsTrigger>
+            <TabsTrigger value={COMPLETED}>completed</TabsTrigger>
+            <TabsTrigger value={PENDING}>pending</TabsTrigger>
           </TabsList>
         </div>
       </Tabs>
