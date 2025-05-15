@@ -1,3 +1,4 @@
+import { ERROR_MESSAGES } from "@/constants/constants";
 import { Todo } from "@/types/todo.type";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL as string;
@@ -5,7 +6,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL as string;
 // 전체 투두 가져오는 함수
 export const getTodos = async (): Promise<Todo[]> => {
   const response = await fetch(BASE_URL, { cache: "no-store" });
-  if (!response.ok) throw new Error("할 일 목록을 불러오지 못했습니다.");
+  if (!response.ok) throw new Error(ERROR_MESSAGES.FETCH_TODOS);
   return response.json();
 };
 
@@ -16,7 +17,7 @@ export const addTodo = async (newTodo: Omit<Todo, "id">): Promise<Todo> => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newTodo),
   });
-  if (!response.ok) throw new Error("할 일을 추가하지 못했습니다.");
+  if (!response.ok) throw new Error(ERROR_MESSAGES.ADD_TODO);
   return response.json();
 };
 
@@ -27,7 +28,7 @@ export const updateTodo = async (todo: Todo): Promise<Todo> => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(todo),
   });
-  if (!response.ok) throw new Error("할 일을 수정하지 못했습니다.");
+  if (!response.ok) throw new Error(ERROR_MESSAGES.UPDATE_TODO);
   return response.json();
 };
 
@@ -36,5 +37,5 @@ export const deleteTodo = async (id: string): Promise<void> => {
   const response = await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
   });
-  if (!response.ok) throw new Error("할 일을 삭제하지 못했습니다.");
+  if (!response.ok) throw new Error(ERROR_MESSAGES.DELETE_TODO);
 };

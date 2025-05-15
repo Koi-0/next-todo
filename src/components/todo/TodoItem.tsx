@@ -9,6 +9,7 @@ import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
 import CustomAlertDialog from "../ui/custom-alert-dialog";
+import { EVENT_KEYS, MESSAGES } from "@/constants/constants";
 
 const TodoItem = React.memo(
   ({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) => {
@@ -19,14 +20,14 @@ const TodoItem = React.memo(
 
     const handleDelete = () => {
       onDelete(todo.id);
-      showDeleteSuccess("할 일이 삭제되었습니다.", "todo-delete-success");
+      showDeleteSuccess(MESSAGES.TODO.DELETE, EVENT_KEYS.TODO_DELETE_SUCCESS);
     };
 
     const handleUpdate = () => {
       if (editedTitle.trim() === "") return;
       onUpdate({ ...todo, title: editedTitle });
       setIsEditing(false);
-      showUpdateSuccess("할 일이 수정되었습니다.", "todo-update-success");
+      showUpdateSuccess(MESSAGES.TODO.UPDATE, EVENT_KEYS.TODO_UPDATE_SUCCESS);
     };
 
     const handleCancel = () => {
@@ -37,7 +38,10 @@ const TodoItem = React.memo(
     const handleCheckboxChange = () => {
       onToggle(todo.id);
       if (!todo.completed) {
-        showCompleteSuccess("할 일이 완료되었습니다.", "todo-complete-success");
+        showCompleteSuccess(
+          MESSAGES.TODO.COMPLETE,
+          EVENT_KEYS.TODO_COMPLETE_SUCCESS,
+        );
       }
     };
 

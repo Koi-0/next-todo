@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { showError, showSuccess } from "@/lib/toast";
+import { EVENT_KEYS, MESSAGES } from "@/constants/constants";
 
 const TodoForm = ({ onAdd }: TodoFormProps) => {
   const [inputText, setInputText] = useState("");
@@ -11,10 +12,10 @@ const TodoForm = ({ onAdd }: TodoFormProps) => {
     e.preventDefault();
     if (inputText.trim()) {
       onAdd(inputText);
-      showSuccess("할 일이 추가되었습니다.", "todo-add-success");
+      showSuccess(MESSAGES.TODO.ADD, EVENT_KEYS.TODO_ADD_SUCCESS);
       setInputText("");
     } else {
-      showError("할 일을 입력해주세요.", "todo-add-error");
+      showError(MESSAGES.TODO.INPUT_REQUIRED, EVENT_KEYS.TODO_ADD_ERROR);
     }
   };
 
