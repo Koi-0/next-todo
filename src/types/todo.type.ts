@@ -30,3 +30,13 @@ export interface TodoItemProps {
 export type InputProps = React.ComponentProps<"input"> & {
   autoFocusOnMount?: boolean;
 };
+
+// 커스텀 알림 대화상자에서 사용하는 props
+export type CustomAlertDialogProps = {
+  triggerLabel: React.ReactNode;
+  triggerVariant?: "white" | "outline";
+  title: string;
+  description: string;
+  confirmLabel?: string;
+  onConfirm: () => void;
+};
