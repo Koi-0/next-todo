@@ -1,4 +1,5 @@
 import TodoContainer from "@/components/todo/TodoContainer";
+import { QUERY_KEY } from "@/constants/constants";
 import { getTodos } from "@/services/todo-services";
 import {
   dehydrate,
@@ -10,7 +11,7 @@ const Home = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["todos"],
+    queryKey: [QUERY_KEY],
     queryFn: getTodos,
   });
 
