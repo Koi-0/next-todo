@@ -1,7 +1,7 @@
 "use client";
 
-import { useTodoMutations } from "@/mutations/todo.mutations";
-import { useTodosQuery } from "@/queries/todo.queries";
+import { useTodoMutations } from "@/hooks/mutations/todo.mutations";
+import { useTodosQuery } from "@/hooks/queries/todo.queries";
 import { Todo } from "@/types/todo.type";
 import { useState } from "react";
 import {
