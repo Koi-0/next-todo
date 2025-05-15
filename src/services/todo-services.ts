@@ -1,6 +1,6 @@
 import { Todo } from "@/types/todo.type";
 
-const BASE_URL = "http://localhost:3001/todos";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
 // 전체 투두 가져오는 함수
 export const getTodos = async (): Promise<Todo[]> => {
