@@ -37,3 +37,12 @@ export const showDeleteSuccess = (message: string, id?: string) => {
     toastIds[toastKey] = toast.success(message, { toastId: toastKey });
   }
 };
+
+// 할 일 완료 토스트
+export const showCompleteSuccess = (message: string, id?: string) => {
+  const toastKey = id || "global-complete-success";
+
+  if (!toast.isActive(toastIds[toastKey])) {
+    toastIds[toastKey] = toast.success(message, { toastId: toastKey });
+  }
+};

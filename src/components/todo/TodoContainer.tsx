@@ -4,20 +4,10 @@ import { useTodoMutations } from "@/hooks/mutations/todo.mutations";
 import { useTodosQuery } from "@/hooks/queries/todo.queries";
 import { Todo } from "@/types/todo.type";
 import { useState } from "react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../ui/alert-dialog";
-import { Button } from "../ui/button";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
+import CustomAlertDialog from "../ui/custom-alert-dialog";
 
 const TodoContainer = () => {
   const [filterType, setFilterType] = useState<"all" | "completed" | "pending">(
@@ -69,23 +59,14 @@ const TodoContainer = () => {
         onValueChange={(value) => setFilterType(value as typeof filterType)}
       >
         <div className="flex items-center justify-between">
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button variant="outline">💡 Tip</Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>💡 Tip</AlertDialogTitle>
-                <AlertDialogDescription>
-                  할 일 내용이 길면 일부가 생략되어 ‘…’으로 표시될 수 있어요.
-                  최대 35자 이내로 입력하면 전체 내용을 볼 수 있습니다!
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogAction>Cancel</AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <CustomAlertDialog
+            triggerLabel="💡 Tip"
+            triggerVariant="outline"
+            title="💡 Tip"
+            description="할 일 내용이 길면 일부가 생략되어 ‘…’으로 표시될 수 있어요. 최대 35자 이내로 입력하면 전체 내용을 볼 수 있습니다!"
+            confirmLabel="닫기"
+            onConfirm={() => {}}
+          />
           <TabsList>
             <TabsTrigger value="all">all</TabsTrigger>
             <TabsTrigger value="completed">completed</TabsTrigger>
