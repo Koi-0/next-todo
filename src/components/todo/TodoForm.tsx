@@ -2,6 +2,7 @@ import { TodoFormProps } from "@/types/todo.type";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { showError, showSuccess } from "@/lib/toast";
 
 const TodoForm = ({ onAdd }: TodoFormProps) => {
   const [inputText, setInputText] = useState("");
@@ -11,7 +12,10 @@ const TodoForm = ({ onAdd }: TodoFormProps) => {
     e.preventDefault();
     if (inputText.trim()) {
       onAdd(inputText);
+      showSuccess("할 일이 추가되었습니다.", "todo-add-success");
       setInputText("");
+    } else {
+      showError("할 일을 입력해주세요.", "todo-add-error");
     }
   };
 

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
+import { showDeleteSuccess, showUpdateSuccess } from "@/lib/toast";
 
 const TodoItem = ({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -12,15 +13,21 @@ const TodoItem = ({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) => {
 
   const handleEdit = () => setIsEditing(true);
 
-  const handleCancel = () => {
-    setIsEditing(false);
-    setEditedTitle(todo.title);
+  const handleDelete = () => {
+    onDelete(todo.id);
+    showDeleteSuccess("할 일이 삭제되었습니다.", "todo-delete-success");
   };
 
   const handleUpdate = () => {
     if (editedTitle.trim() === "") return;
     onUpdate({ ...todo, title: editedTitle });
     setIsEditing(false);
+    showUpdateSuccess("할 일이 수정되었습니다.", "todo-update-success");
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+    setEditedTitle(todo.title);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -66,7 +73,7 @@ const TodoItem = ({ todo, onToggle, onDelete, onUpdate }: TodoItemProps) => {
           </p>
           <div className="flex gap-2">
             <Button onClick={handleEdit}>수정</Button>
-            <Button onClick={() => onDelete(todo.id)}>삭제</Button>
+            <Button onClick={handleDelete}>삭제</Button>
           </div>
         </>
       )}
