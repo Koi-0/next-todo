@@ -3,7 +3,7 @@
 import { useTodoMutations } from "@/hooks/mutations/todo.mutations";
 import { useTodosQuery } from "@/hooks/queries/todo.queries";
 import { Todo } from "@/types/todo.type";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
@@ -18,28 +18,40 @@ const TodoContainer = () => {
   const { addTodoMutation, updateTodoMutation, deleteTodoMutation } =
     useTodoMutations();
 
-  const handleAddTodo = (title: string) => {
-    const newTodo: Omit<Todo, "id"> = {
-      title,
-      completed: false,
-    };
-    addTodoMutation.mutate(newTodo);
-  };
+  const handleAddTodo = useCallback(
+    (title: string) => {
+      const newTodo: Omit<Todo, "id"> = {
+        title,
+        completed: false,
+      };
+      addTodoMutation.mutate(newTodo);
+    },
+    [addTodoMutation],
+  );
 
-  const handleToggleComplete = (id: string) => {
-    const todo = todos.find((t) => t.id === id);
-    if (!todo) return;
-    const updatedTodo = { ...todo, completed: !todo.completed };
-    updateTodoMutation.mutate(updatedTodo);
-  };
+  const handleToggleComplete = useCallback(
+    (id: string) => {
+      const todo = todos.find((t) => t.id === id);
+      if (!todo) return;
+      const updatedTodo = { ...todo, completed: !todo.completed };
+      updateTodoMutation.mutate(updatedTodo);
+    },
+    [todos, updateTodoMutation],
+  );
 
-  const handleUpdateTodo = (updatedTodo: Todo) => {
-    updateTodoMutation.mutate(updatedTodo);
-  };
+  const handleUpdateTodo = useCallback(
+    (updatedTodo: Todo) => {
+      updateTodoMutation.mutate(updatedTodo);
+    },
+    [updateTodoMutation],
+  );
 
-  const handleDeleteTodo = (id: string) => {
-    deleteTodoMutation.mutate(id);
-  };
+  const handleDeleteTodo = useCallback(
+    (id: string) => {
+      deleteTodoMutation.mutate(id);
+    },
+    [deleteTodoMutation],
+  );
 
   const filteredTodos = todos.filter((todo) => {
     if (filterType === "completed") return todo.completed;
