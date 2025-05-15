@@ -4,10 +4,12 @@ import { useTodoMutations } from "@/hooks/mutations/todo.mutations";
 import { useTodosQuery } from "@/hooks/queries/todo.queries";
 import { Todo } from "@/types/todo.type";
 import { useCallback, useState } from "react";
+import CustomAlertDialog from "../ui/custom-alert-dialog";
+import CustomSkeleton from "../ui/custom-skeleton";
+import ErrorFallback from "../ui/error-fallback";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
-import CustomAlertDialog from "../ui/custom-alert-dialog";
 
 const TodoContainer = () => {
   const [filterType, setFilterType] = useState<"all" | "completed" | "pending">(
@@ -59,11 +61,18 @@ const TodoContainer = () => {
     return true;
   });
 
-  if (isPending) return <p>로딩 중입니다...</p>;
-  if (isError) return <p>에러가 발생했습니다.</p>;
+  if (isPending) return <CustomSkeleton />;
+  if (isError)
+    return (
+      <ErrorFallback
+        errorTitle="ERROR"
+        errorMessage="데이터를 불러오는 중 문제가 발생했습니다."
+      />
+    );
 
   return (
     <section className="space-y-8 p-4">
+      <h1 className="text-2xl font-bold">📝 Todo List</h1>
       <TodoForm onAdd={handleAddTodo} />
       <Tabs
         defaultValue="all"

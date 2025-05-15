@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 // 하나의 할 일 항목 정의
 export interface Todo {
   id: string;
@@ -40,3 +42,23 @@ export type CustomAlertDialogProps = {
   confirmLabel?: string;
   onConfirm: () => void;
 };
+
+// ErrorBoundary 컴포넌트에서 사용하는 props
+export interface ErrorBoundaryProps {
+  children: ReactNode;
+  fallback?: ReactNode;
+  errorTitle?: string;
+  errorMessage?: string;
+}
+
+// ErrorBoundary 컴포넌트에서 사용하는 state
+export interface ErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+// ErrorFallback 컴포넌트에서 사용하는 props
+export interface ErrorFallbackProps {
+  errorTitle?: string;
+  errorMessage?: string;
+}
